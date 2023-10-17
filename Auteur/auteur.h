@@ -9,7 +9,6 @@ class Auteur {
 		char dateNaissance[6];
 		char dateDeces[6];
 
-		void listAuteur();
 		void ajouterAuteur();
 		void modifierAuteur(int indice);
 		void supprimerAuteur(int indice);

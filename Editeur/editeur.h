@@ -6,8 +6,6 @@ public:
 	int id;
 	char nom[50];
 
-
-	void listEditeur();
 	void ajouterEditeur();
 	void modifierEditeur(int indice);
 	void supprimerEditeur(int indice);

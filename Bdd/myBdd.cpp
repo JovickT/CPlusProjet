@@ -1,7 +1,9 @@
 #include "../Bdd/myBdd.h"
 #include "../Auteur/auteur.h"
-#include "../Editeur/Editeur.h"
+#include "../Editeur/editeur.h"
+#include "../Livre/livre.h"
 #include <stdio.h> // Ajoutez l'inclusion nécessaire
+#include <cmath>
 
 		
 void db::tableAuteur() {
@@ -61,5 +63,32 @@ void db::tableEditeur() {
 
 	}
 
+}
+
+
+void db::tableLivre() {
+	Livre l1 = { 0,"Candide","2017",3.50 };
+	Livre l2 = { 1,"L'Etranger","2002",2.50 };
+	Livre l3 = { 2,"La Peste","2002",6.76 };
+	Livre l4 = { 3,"Les Miserables","21/11/2019",4.80 };
+	Livre l5 = { 4,"David Copperfield","13/08/2020",7.90 };
+
+	tabLivres[0] = l1;
+	tabLivres[1] = l2;
+	tabLivres[2] = l3;
+	tabLivres[3] = l4;
+	tabLivres[4] = l5;
+
+	Livre headerTab; // Créer une instance de la classe Auteur
+	headerTab.displayHeaderTabLivre();
+
+	for (int i = 0; i < lengthTabLivres; i++)
+	{
+		printf("|%d", tabLivres[i].id);
+		printf("  |%s", tabLivres[i].titre);
+		printf("           |%s", tabLivres[i].datePublication);
+		printf("                |%lf", tabLivres[i].prix);
+		printf(" |\n");
+	}
 }
 
