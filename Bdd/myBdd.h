@@ -7,16 +7,12 @@
 
 class db {
 public:
-	void tableAuteur();
-	void tableEditeur();
-	void tableLivre();
+	void consultation(int valide, int navigato, char choixNav[20]);
+	void actionChoix(int valide, char choixNav[20], int action, int nav, int newElement, int indice, int modifier);
 
-	int lengthTabAuteurs = 6; // Initialisez lengthTabAuteurs avec la taille du tableau
-	int lengthTabEditeurs = 5; // Initialisez lengthTabEditeurs avec la taille du tableau
-	int lengthTabLivres = 5; // Initialisez lengthTabLivres avec la taille du tableau
-	Auteur tabAuteurs[50];
-	Editeur tabEditeurs[50];
-	Livre tabLivres[50];
+
+	//Auteur* test = tabAuteurs;
+
 private:
 	
 protected:

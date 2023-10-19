@@ -1,94 +1,152 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "../Bdd/myBdd.h"
 #include "../Auteur/auteur.h"
 #include "../Editeur/editeur.h"
 #include "../Livre/livre.h"
 #include <stdio.h> // Ajoutez l'inclusion nécessaire
+#include <string.h>
 #include <cmath>
+//#include <mysql_driver.h>
+//#include <mysql_connection.h>
 
 		
-void db::tableAuteur() {
-	Auteur a1 = { 0,"Victor","Hugo","1802","1885" };
-	Auteur a2 = { 1,"Charles","Baudelaire","1821","1867" };
-	Auteur a3 = { 2,"Albert","Camus","1913","1960" };
-	Auteur a4 = { 3,"Charles","Dikens","1812","1870" };
-	Auteur a5 = { 4,"","Voltaire","1694","1778" };
-	Auteur a6 = { 5,"","test","1999","2021" };
 
-	tabAuteurs[0] = a1;
-	tabAuteurs[1] = a2;
-	tabAuteurs[2] = a3;
-	tabAuteurs[3] = a4;
-	tabAuteurs[4] = a5;
-	tabAuteurs[5] = a6;
+void db::actionChoix(int valide, char choixNav[20], int action, int nav, int newElement, int indice, int modifier) {
 
-	Auteur headerTab; // Créer une instance de la classe Auteur
-	headerTab.displayHeaderTabAuteur();
+	Auteur auteur;
+	Editeur editeur;
+	Livre livre;
+	db database;
 
+	printf("\nvaleur de nav: %d !!\n\n", nav);
+	while (valide == -1) {
+		printf("\nChoisissez une actions !!\n\n");
+		printf("Ajouter (Ajouter = 1) un %s \n", choixNav);
+		printf("Modifier (Modifier = 2) un %s \n", choixNav);
+		printf("Supprimer (Supprimer = 3) un %s \n", choixNav);
+		scanf("%d", &action);
 
-	for (int i = 0; i < lengthTabAuteurs; i++)
-	{
-		printf("|%d", tabAuteurs[i].id);
-		printf("  |%s", tabAuteurs[i].nom);
-		printf("      |%s", tabAuteurs[i].prenom);
-		printf("                |%s", tabAuteurs[i].dateNaissance);
-		printf("                |%s", tabAuteurs[i].dateDeces);
-		printf("|\n");
+		if (action == 1) {
+			if (nav == 1) {
+				while (newElement == 1) {
+					if (newElement == 1) {
+						auteur.reAuteur(newElement, valide, nav, choixNav);
+					}
+					else {
+						newElement = -1;
+					}
+				}
+			}
+			else if (nav == 2) {
+				while (newElement == 1) {
+					if (newElement == 1) {
+						editeur.reEditeur(newElement, valide, nav, choixNav);
+					}
+					else {
+						newElement = -1;
+					}
+				}
+			}
+			else if (nav == 3) {
+				while (newElement == 1) {
+					if (newElement == 1) {
+						livre.reLivre(newElement, valide, nav, choixNav);
+					}
+					else {
+						newElement = -1;
+					}
+				}
+			}
+			valide = 0;
+
+		}
+		else if (action == 2) {
+			printf("Tapez l'ID de l'entite que vous voulez modfier \n");
+			scanf(" %d", &indice);
+			if (nav == 1) {
+				printf("|ID |\n");
+				printf("|%d \n", auteur.tabAuteurs[indice].id);
+				Auteur update;
+				update.modifierAuteur(indice);
+				update.reUpdAuteur(modifier, indice);
+			}
+			else if (nav == 2) {
+				Editeur update;
+				printf("|ID |\n");
+				printf("|%d \n", update.tabEditeurs[indice].id);
+				update.modifierEditeur(indice);
+				//refaire.reUpdAuteur(modifier, indice);
+			}
+			else if (nav == 3) {
+				//ajouterLivre();
+			}
+			valide = 0;
+
+		}
+		else if (action == 3) {
+			printf("Tapez l'ID de l'entite que vous voulez supprimer \n");
+			scanf("%d", &indice);
+			if (nav == 1) {
+				//supprimerAuteur(indice);
+			}
+			else if (nav == 2) {
+				//ajouterEditeur();
+			}
+			else if (nav == 3) {
+				//ajouterLivre();
+			}
+			valide = 0;
+		}
+		else {
+			printf("Choix non repertorie ?\n");
+			valide = -1;
+		}
 
 	}
 
 }
 
-void db::tableEditeur() {
-	Editeur e1 = { 0,"Gallimard" };
-	Editeur e2 = { 1,"Flammarion" };
-	Editeur e3 = { 2,"Hachette" };
-	Editeur e4 = { 3,"Baudelaire" };
-	Editeur e5 = { 4,"Minuit", };
+void db::consultation(int valide, int navigato, char choixNav[20]) {
+	int valideActionChoix = -1;
+	int indice = 0;
+	int modifier = 0;
+	int action = 1;
+	int newElement = 1;
+	while (valide == 0) {
 
-	tabEditeurs[0] = e1;
-	tabEditeurs[1] = e2;
-	tabEditeurs[2] = e3;
-	tabEditeurs[3] = e4;
-	tabEditeurs[4] = e5;
+		printf("Consulter la liste des Auteurs, Editeurs ou Livres de la librairie ?\n");
+		printf("Auteurs = 1\nEditeurs = 2 \nLivres = 3 \n\n");
+		scanf("%d", &navigato);
+		if (navigato == 1) {
+			Auteur a; // Créez une instance de la classe db
+			a.tableAuteur(); // Appelez la méthode tableAuteur à travers l'instance de la classe db
+			strcpy(choixNav, "auteur");
+			valide = -1;
+		}
+		else if (navigato == 2) {
+			Editeur e; // Créez une instance de la classe db
+			e.tableEditeur(); // Appelez la méthode tableAuteur à travers l'instance de la classe db
+			strcpy(choixNav, "editeur");;
+			valide = -1;
+		}
+		else if (navigato == 3) {
+			Livre l; // Créez une instance de la classe db
+			l.tableLivre(); // Appelez la méthode tableAuteur à travers l'instance de la classe db
+			strcpy(choixNav, "livre");;
+			valide = -1;
+		}
+		else {
+			printf("Choix non repertorie ?\n");
 
-	Editeur headerTab; // Créer une instance de la classe Auteur
-	headerTab.displayHeaderTabEditeur();
-
-
-	for (int i = 0; i < lengthTabEditeurs; i++)
-	{
-		printf("|%d", tabEditeurs[i].id);
-		printf("  |%s", tabEditeurs[i].nom);
-		printf("|\n");
+			valide = 0;
+		}
 
 	}
+
+	actionChoix(valideActionChoix, choixNav, action, navigato, newElement, indice, modifier);
 
 }
 
 
-void db::tableLivre() {
-	Livre l1 = { 0,"Candide","2017",3.50 };
-	Livre l2 = { 1,"L'Etranger","2002",2.50 };
-	Livre l3 = { 2,"La Peste","2002",6.76 };
-	Livre l4 = { 3,"Les Miserables","21/11/2019",4.80 };
-	Livre l5 = { 4,"David Copperfield","13/08/2020",7.90 };
 
-	tabLivres[0] = l1;
-	tabLivres[1] = l2;
-	tabLivres[2] = l3;
-	tabLivres[3] = l4;
-	tabLivres[4] = l5;
-
-	Livre headerTab; // Créer une instance de la classe Auteur
-	headerTab.displayHeaderTabLivre();
-
-	for (int i = 0; i < lengthTabLivres; i++)
-	{
-		printf("|%d", tabLivres[i].id);
-		printf("  |%s", tabLivres[i].titre);
-		printf("           |%s", tabLivres[i].datePublication);
-		printf("                |%lf", tabLivres[i].prix);
-		printf(" |\n");
-	}
-}
 
