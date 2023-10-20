@@ -6,7 +6,7 @@
 
 Livre::Livre(){}
 Livre::Livre(int _id, const char* _titre, const char* _datePublication, const double _prix) {
-	id = lengthTabLivres;
+	id = _id;
 	strcpy(titre, _titre);
 	strcpy(datePublication, _datePublication);
 	prix = _prix;
@@ -14,7 +14,7 @@ Livre::Livre(int _id, const char* _titre, const char* _datePublication, const do
 }
 
 Livre::~Livre() {
-	delete[] tabLivres; // Libérez la mémoire à la fin de la vie de l'objet
+	//delete[] tabLivres; // Libérez la mémoire à la fin de la vie de l'objet
 }
 
 void Livre::tableLivre() {
@@ -23,6 +23,8 @@ void Livre::tableLivre() {
 	Livre l3 = { 2,"La Peste","2002",6.76 };
 	Livre l4 = { 3,"Les Miserables","21/11/2019",4.80 };
 	Livre l5 = { 4,"David Copperfield","13/08/2020",7.90 };
+
+	tabLivres = new Livre[lengthTabLivres];
 
 	tabLivres[0] = l1;
 	tabLivres[1] = l2;
@@ -102,6 +104,18 @@ void Livre::reLivre(int nouveauLivre, int validerConsulation, int navigation, ch
 	ajouterLivre();
 	printf("\nVoulez-vous ajouter un autre livre ? (oui = 1 / non = 0)\n\n");
 	scanf("%d", &nouveauLivre);
+}
+
+void Livre::ajouterCondition(int nouveauLivre, int validerConsulation, int navigation, char choixNavigation[20]) {
+
+	while (nouveauLivre == 1) {
+		if (nouveauLivre == 1) {
+			reLivre(nouveauLivre, validerConsulation, navigation, choixNavigation);
+		}
+		else {
+			nouveauLivre = -1;
+		}
+	}
 }
 
 

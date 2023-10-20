@@ -19,6 +19,8 @@ public:
 	void supprimerEditeur(int indice);
 	void displayHeaderTabEditeur();
 	void reEditeur(int nouvelEditeur, int validerConsulation, int navigation, char choixNavigation[20]);
+	void ajouterCondition(int nouvelEditeur, int validerConsulation, int navigation, char choixNavigation[20]);
+	void modifierCondition(int indice, int modifier, int navigation);
 private:
 
 protected:

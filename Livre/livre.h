@@ -21,6 +21,7 @@ public:
 	void supprimerLivre(int indice);
 	void displayHeaderTabLivre();
 	void reLivre(int nouveauLivre, int validerConsulation, int navigation, char choixNavigation[20]);
+	void ajouterCondition(int nouveauLivre, int validerConsulation, int navigation, char choixNavigation[20]);
 private:
 
 protected:

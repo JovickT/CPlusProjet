@@ -6,29 +6,29 @@
 
 Editeur::Editeur(){}
 Editeur::Editeur(int _id, const char* _nom) {
-	_id = lengthTabEditeurs;
+	id = _id;
 	strcpy(nom, _nom);
 }
 
 Editeur::~Editeur() {
-	delete[] tabEditeurs; // Libérez la mémoire à la fin de la vie de l'objet
+	//delete[] tabEditeurs; // Libérez la mémoire à la fin de la vie de l'objet
 }
 
 void Editeur::tableEditeur() {
-	Editeur e1 = { 0,"Gallimard" };
+	/*Editeur e1 = { 0,"Gallimard" };
 	Editeur e2 = { 1,"Flammarion" };
 	Editeur e3 = { 2,"Hachette" };
 	Editeur e4 = { 3,"Baudelaire" };
-	Editeur e5 = { 4,"Minuit", };
+	Editeur e5 = { 4,"Minuit" };*/
+	tabEditeurs = new Editeur[lengthTabEditeurs];
 
-	tabEditeurs[0] = e1;
-	tabEditeurs[1] = e2;
-	tabEditeurs[2] = e3;
-	tabEditeurs[3] = e4;
-	tabEditeurs[4] = e5;
+	tabEditeurs[0] = { 0,"Gallimard" };
+	tabEditeurs[1] = { 1,"Flammarion" };
+	tabEditeurs[2] = { 2,"Hachette" };
+	tabEditeurs[3] = { 3,"Baudelaire" };
+	tabEditeurs[4] = { 4,"Minuit" };
 
 	displayHeaderTabEditeur();
-
 
 	for (int i = 0; i < lengthTabEditeurs; i++)
 	{
@@ -68,8 +68,6 @@ void Editeur::ajouterEditeur() {
 	}
 
 	tableEditeur();
-
-
 }
 
 void Editeur::modifierEditeur(int indice) {
@@ -105,5 +103,29 @@ void Editeur::reEditeur(int nouvelEditeur, int validerConsulation, int navigatio
 		cons.consultation(validerConsulation, navigation, choixNavigation);
 		cons.actionChoix(valideActionChoix, choixNavigation, action, navigation, nouvelEditeur, indice, modifier);
 
+	}
+}
+
+void Editeur::ajouterCondition(int nouvelEditeur, int validerConsulation, int navigation, char choixNavigation[20]) {
+
+	while (nouvelEditeur == 1) {
+		if (nouvelEditeur == 1) {
+			reEditeur(nouvelEditeur, validerConsulation, navigation, choixNavigation);
+		}
+		else {
+			nouvelEditeur = -1;
+		}
+	}
+}
+
+void Editeur::modifierCondition(int indice, int modifier, int navigation) {
+	printf("Tapez l'ID de l'entite que vous voulez modfier \n");
+	scanf(" %d", &indice);
+	if (navigation == 1) {
+		printf("|ID |\n");
+		printf("|%d \n", tabEditeurs[indice].id);
+		Editeur update;
+		update.modifierEditeur(indice);
+		//update.reUpdEditeur(modifier, indice);
 	}
 }

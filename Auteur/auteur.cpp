@@ -3,6 +3,7 @@
 #include "../Bdd/myBdd.h"
 #include <stdio.h> // Ajoutez l'inclusion nécessaire
 #include <string.h>
+
 //#include <iostream>
 
 Auteur::Auteur(){}
@@ -14,9 +15,9 @@ Auteur::Auteur(int _id, const char* _nom, const char* _prenom, const char* _date
 	strcpy(dateDeces, _dateDeces);
 }
 
-//Auteur::~Auteur() {
-//	delete[] tabAuteurs; // Libérez la mémoire à la fin de la vie de l'objet
-//}
+Auteur::~Auteur() {
+	//delete[] tabAuteurs; // Libérez la mémoire à la fin de la vie de l'objet
+}
 
 void Auteur::tableAuteur() {
 	tabAuteurs = new Auteur[lengthTabAuteurs]; // allouez dynamiquement la mémoire
@@ -48,56 +49,39 @@ void Auteur::tableAuteur() {
 
 void Auteur::ajouterAuteur() {
 
-	//char tempNom[50]; // Temporaire pour stocker le nom lu
-
 	printf("Nom: ");
-	scanf("%s",&nom); // Supprimer le caractère de nouvelle ligne
+	scanf("%s",&nom); 
 
 	printf("\nPrenom: ");
-	scanf("%s", &prenom); // Supprimer le caractère de nouvelle ligne
+	scanf("%s", &prenom); 
 
 
 	printf("\nDate de naissance: ");
-	scanf("%s", &dateNaissance); // Supprimer le caractère de nouvelle ligne
+	scanf("%s", &dateNaissance);
 
 
 	printf("\nDate de deces: ");
-	scanf("%s", &dateDeces); // Supprimer le caractère de nouvelle ligne
+	scanf("%s", &dateDeces);
 
 
 	//lengthTabAuteurs++;
-	printf("\nlenghTabAuteurs 1: %d", lengthTabAuteurs);
+	printf("\njuste pour voir id indice 3 = : %d", tabAuteurs[3].id);
 
 	Auteur nouvelAuteur;
 
-	/*nouvelAuteur.id = lengthTabAuteurs;
-	printf("\nTaille du tableau d'auteur: %d\n", nouvelAuteur.id);
+	nouvelAuteur.id = lengthTabAuteurs;
+	//printf("\nTaille du tableau d'auteur: %d\n", nouvelAuteur.id);
 	strncpy(nouvelAuteur.nom, nom, sizeof(nouvelAuteur.nom));
 	strncpy(nouvelAuteur.prenom, prenom, sizeof(nouvelAuteur.prenom));
 	strncpy(nouvelAuteur.dateNaissance, dateNaissance, sizeof(nouvelAuteur.dateNaissance));
-	strncpy(nouvelAuteur.dateDeces, dateDeces, sizeof(nouvelAuteur.dateDeces));*/
+	strncpy(nouvelAuteur.dateDeces, dateDeces, sizeof(nouvelAuteur.dateDeces));
 
 	if (lengthTabAuteurs < 50) {
 
-		nouvelAuteur.tabAuteurs = new Auteur[lengthTabAuteurs + 1];
-		printf("\tabAuteurs id 0 : %d", tabAuteurs[0].id);
-
-		// Copiez les données de l'ancien tableau vers le nouveau
-		for (int i = 0; i < lengthTabAuteurs; ++i) {
-			//nouvelAuteur.tabAuteurs[i] = tabAuteurs[i];
-			nouvelAuteur.tabAuteurs[i].id = tabAuteurs[i].id;
-			strcpy(nouvelAuteur.tabAuteurs[i].nom, tabAuteurs[i].nom);
-			strcpy(nouvelAuteur.tabAuteurs[i].prenom, tabAuteurs[i].prenom);
-			strcpy(nouvelAuteur.tabAuteurs[i].dateNaissance, tabAuteurs[i].dateNaissance);
-			strcpy(nouvelAuteur.tabAuteurs[i].dateDeces, tabAuteurs[i].dateDeces);
-		}
-
-		// Ajoutez le nouvel auteur à la fin du tableau
-		nouvelAuteur.tabAuteurs[lengthTabAuteurs] = { lengthTabAuteurs ,nom, prenom, dateNaissance, dateDeces};
-
-		// Incrémentez la taille du tableau
+		tabAuteurs[lengthTabAuteurs] = nouvelAuteur;
+		
 		lengthTabAuteurs++;
-		printf("\nlenghTabAuteurs 3: %d", lengthTabAuteurs);
+		//printf("\nlenghTabAuteurs 3: %d", lengthTabAuteurs);
 
 		printf("\nAuteur ajoute avec succes.\n");
 	}
@@ -105,7 +89,7 @@ void Auteur::ajouterAuteur() {
 		printf("\nLe tableau est plein. Impossible d'ajouter plus d'auteurs.\n");
 	}
 
-	printf("\nsize of board auteurs: %d \n",lengthTabAuteurs);
+	//printf("\nsize of board auteurs: %d \n",lengthTabAuteurs);
 	tableAuteur();
 }
 
@@ -191,6 +175,30 @@ void Auteur::reUpdAuteur(int res, int indice) {
 		scanf("%d", &indice);
 		modifierAuteur(indice);
 		res = -1;
+	}
+}
+
+void Auteur::ajouterCondition(int nouvelAuteur, int validerConsulation, int navigation, char choixNavigation[20]) {
+
+	while (nouvelAuteur == 1) {
+		if (nouvelAuteur == 1) {
+			reAuteur(nouvelAuteur, validerConsulation, navigation, choixNavigation);
+		}
+		else {
+			nouvelAuteur = -1;
+		}
+	}
+}
+
+void Auteur::modifierCondition(int indice,int modifier, int navigation) {
+	printf("Tapez l'ID de l'entite que vous voulez modfier \n");
+	scanf(" %d", &indice);
+	if (navigation == 1) {
+		printf("|ID |\n");
+		printf("|%d \n", tabAuteurs[indice].id);
+		Auteur update;
+		update.modifierAuteur(indice);
+		update.reUpdAuteur(modifier, indice);
 	}
 }
 

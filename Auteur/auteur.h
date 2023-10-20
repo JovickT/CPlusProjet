@@ -14,7 +14,7 @@ class Auteur {
 		Auteur* tabAuteurs;
 		Auteur();
 		Auteur(int _id, const char* _nom, const char* _prenom, const char* _dateNaissance, const char* _dateDeces); // Constructeur
-		//~Auteur(); // Destructeur
+		~Auteur(); // Destructeur
 
 		void tableAuteur();
 		void ajouterAuteur();
@@ -23,6 +23,8 @@ class Auteur {
 		void displayHeaderTabAuteur();
 		void reAuteur(int nouvelAuteur, int validerConsulation, int navigation, char choixNavigation[20]);
 		void reUpdAuteur(int res, int indice);
+		void ajouterCondition(int nouvelAuteur, int validerConsulation, int navigation, char choixNavigation[20]);
+		void modifierCondition(int indice, int modifier, int navigation);
 	private:
 
 	protected:
